@@ -13,17 +13,10 @@ Model::~Model()
 {
     for (IModel *iModel : Model::models) {
         Model *model = static_cast<Model*>(iModel);
-        for (IFlow *iFlow : model->flows) {
-            Flow *flow = static_cast<Flow*>(iFlow);
-            delete flow;
-        }
+        for (IFlow *iFlow : model->flows)
+            delete iFlow;
 
-        for (ISystem *iSystem : model->systems) {
-            System *system = static_cast<System*>(iSystem);
-            delete system;
-        }
-
-        delete model;
+        // Os sistemas já são deletados no destrutor de Flow
     }
 }
 
@@ -71,5 +64,10 @@ IFlow &Model::createFlow(double (* const& expression)(), IModel &modelContainer,
     IFlow *flow = new Flow(expression, source, target);
     static_cast<Model&>(modelContainer).flows.push_back(flow);
     return *flow;
+}
+
+void Model::destroy()
+{
+    delete this;
 }
 

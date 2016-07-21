@@ -12,6 +12,7 @@ public:
     static IModel& createModel();
     virtual ISystem& createSystem(IModel&, const int &) = 0;
     virtual IFlow& createFlow(double (* const& expression)(), IModel&, ISystem* const &source, ISystem* const &target) = 0;
+    virtual void destroy() = 0;
 };
 
 #endif // IMODEL_HPP

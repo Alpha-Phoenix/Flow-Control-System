@@ -15,6 +15,7 @@ public:
     static IModel& createModel();
     virtual ISystem& createSystem(IModel &modelContainer, const int &initialValue) override;
     virtual IFlow& createFlow(double (* const& expression)(), IModel &modelContainer, ISystem* const &source, ISystem* const &target) override;
+    virtual void destroy() override;
 private:
     std::vector<IFlow*> flows;
     std::vector<ISystem*> systems;

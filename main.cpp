@@ -16,6 +16,9 @@ int main()
     assert((abs(pop1 - 36.6032)) <= 0.0001);
     assert((abs(flow.getValue() - 0.366032)) <= 0.0001);
     assert((abs(pop2 - 63.3968)) <= 0.0001);
+    growModel.destroy();
+
+    // Resolver os problemas de alocação
     return 0;
 }
 
