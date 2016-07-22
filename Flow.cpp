@@ -7,10 +7,6 @@ Flow::Flow(double (* const& expression)(), ISystem* const &source = nullptr, ISy
 
 Flow::~Flow()
 {
-    delete this->source;
-    delete this->target;
-    this->source = nullptr;
-    this->target = nullptr;
 }
 
 double Flow::getValue() const

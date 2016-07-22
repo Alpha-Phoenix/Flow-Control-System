@@ -2,7 +2,7 @@
 #include "System.hpp"
 #include "FLow.hpp"
 #include <vector>
-
+#include <algorithm>
 std::vector<IModel*> Model::models;
 
 Model::Model()
@@ -11,12 +11,20 @@ Model::Model()
 
 Model::~Model()
 {
-    for (IModel *iModel : Model::models) {
-        Model *model = static_cast<Model*>(iModel);
-        for (IFlow *iFlow : model->flows)
-            delete iFlow;
+    if (models.empty()) return;
+    for (auto it = models.begin(); it != models.end(); it++) {
+        Model *model = static_cast<Model*>(*it);
+        if (model == this) {
+            models.erase(it);
+            for (auto flow : model->flows)
+                delete flow;
+            model->flows.clear();
 
-        // Os sistemas já são deletados no destrutor de Flow
+            for (auto system : model->systems)
+                delete system;
+            model->systems.clear();
+            break;
+        }
     }
 }
 

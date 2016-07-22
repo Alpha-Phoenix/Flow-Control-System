@@ -12,7 +12,6 @@ System::System(const ISystem &other)
 
 System::~System()
 {
-
 }
 
 const double &System::getValue() const
